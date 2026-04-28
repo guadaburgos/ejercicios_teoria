@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicios JavaScript</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: #c8f060;
+    }
+
+    h2 {
+      color: #60d0f0;
+      border-left: 4px solid #60d0f0;
+      padding-left: 10px;
+    }
+
+    .contenedor {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background-color: #1b1b1b;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .numero {
+      background-color: #c8f060;
+      color: #000;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: white;
+    }
+
+    button {
+      background-color: #c8f060;
+      color: #000;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background-color: #b5dc50;
+    }
+
+    .resultado {
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      color: #c8f060;
+      min-height: 25px;
+      font-size: 14px;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .resaltado {
+      background-color: #c8f060;
+      color: #000;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .caja-click {
+      background-color: #222;
+      border: 1px solid #444;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .tarjeta {
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .tarjeta img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Ejercicios JavaScript</h1>
+    <p>Arrays y manejo del DOM</p>
+  </header>
+
+  <div class="contenedor">
+
+    <h2>Manejo de Arrays</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <span class="numero">01</span>
+        <h3>Filtrar números pares</h3>
+        <p>Devuelve solamente los números pares.</p>
+        <input type="text" id="inputPares" value="1,2,3,4,5,6,7,8">
+        <button onclick="filtrarPares()">Filtrar</button>
+        <div class="resultado" id="resultadoPares"></div>
+      </div>
+
+      <div class="card">
+        <span class="numero">02</span>
+        <h3>Eliminar duplicados</h3>
+        <p>Elimina los elementos repetidos del array.</p>
+        <input type="text" id="inputDuplicados" value="1,2,2,3,4,4,5">
+        <button onclick="eliminarDuplicados()">Eliminar</button>
+        <div class="resultado" id="resultadoDuplicados"></div>
+      </div>
+
+      <div class="card">
+        <span class="numero">03</span>
+        <h3>Ordenar nombres</h3>
+        <p>Ordena los nombres alfabéticamente.</p>
+        <input type="text" id="inputNombres" value="Carlos,Ana,Beatriz,David">
+        <button onclick="ordenarNombres()">Ordenar</button>
+        <div class="resultado" id="resultadoNombres"></div>
+      </div>
+
+      <div class="card">
+        <span class="numero">04</span>
+        <h3>Sumar elementos</h3>
+        <p>Suma todos los números del array.</p>
+        <input type="text" id="inputSuma" value="10,20,30,40">
+        <button onclick="sumarArray()">Sumar</button>
+        <div class="resultado" id="resultadoSuma"></div>
+      </div>
+
+      <div class="card">
+        <span class="numero">05</span>
+        <h3>Buscar elemento</h3>
+        <p>Busca un nombre y devuelve su índice o -1.</p>
+        <input type="text" id="arrayBuscar" value="Ana,Juan,Pedro,Lucia">
+        <input type="text" id="nombreBuscar" placeholder="Nombre a buscar">
+        <button onclick="buscarElemento()">Buscar</button>
+        <div class="resultado" id="resultadoBuscar"></div>
+      </div>
+
+    </div>
+
+    <h2>Manejo del DOM</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <span class="numero">06</span>
+        <h3>Crear lista dinámica</h3>
+        <p>Crea elementos li dentro de un ul.</p>
+        <input type="text" id="inputLista" value="Lucia,Martin,Sofia,Diego">
+        <button onclick="crearLista()">Crear lista</button>
+        <ul id="lista"></ul>
+      </div>
+
+      <div class="card">
+        <span class="numero">07</span>
+        <h3>Modificar texto por ID</h3>
+        <p id="textoCambiar">Texto original</p>
+        <input type="text" id="nuevoTexto" placeholder="Nuevo texto">
+        <button onclick="modificarTexto()">Modificar</button>
+      </div>
+
+      <div class="card">
+        <span class="numero">08</span>
+        <h3>Agregar y quitar clase</h3>
+        <div id="caja" class="caja-click">Hacé click para cambiar mi estilo</div>
+      </div>
+
+      <div class="card">
+        <span class="numero">09</span>
+        <h3>Formulario dinámico</h3>
+        <input type="text" id="inputDato" placeholder="Escribí un dato">
+        <button onclick="guardarDato()">Guardar</button>
+        <ul id="listaDatos"></ul>
+      </div>
+
+      <div class="card">
+        <span class="numero">10</span>
+        <h3>Tarjetas dinámicas</h3>
+        <p>Genera tarjetas usando un array de objetos.</p>
+        <button onclick="generarTarjetas()">Generar tarjetas</button>
+        <div id="contenedorTarjetas"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Trabajo práctico de JavaScript</p>
+  </footer>
+
+  <script>
+    function convertirArrayNumeros(id) {
+      return document.getElementById(id).value
+        .split(",")
+        .map(numero => Number(numero.trim()))
+        .filter(numero => !isNaN(numero));
+    }
+
+    function convertirArrayTexto(id) {
+      return document.getElementById(id).value
+        .split(",")
+        .map(texto => texto.trim())
+        .filter(texto => texto !== "");
+    }
+
+    function filtrarPares() {
+      const numeros = convertirArrayNumeros("inputPares");
+      const pares = numeros.filter(numero => numero % 2 === 0);
+
+      document.getElementById("resultadoPares").textContent =
+        "Resultado: " + pares.join(", ");
+    }
+
+    function eliminarDuplicados() {
+      const datos = convertirArrayTexto("inputDuplicados");
+      const sinDuplicados = [...new Set(datos)];
+
+      document.getElementById("resultadoDuplicados").textContent =
+        "Resultado: " + sinDuplicados.join(", ");
+    }
+
+    function ordenarNombres() {
+      const nombres = convertirArrayTexto("inputNombres");
+      nombres.sort();
+
+      document.getElementById("resultadoNombres").textContent =
+        "Resultado: " + nombres.join(", ");
+    }
+
+    function sumarArray() {
+      const numeros = convertirArrayNumeros("inputSuma");
+      const suma = numeros.reduce((total, numero) => total + numero, 0);
+
+      document.getElementById("resultadoSuma").textContent =
+        "Resultado: " + suma;
+    }
+
+    function buscarElemento() {
+      const nombres = convertirArrayTexto("arrayBuscar");
+      const nombre = document.getElementById("nombreBuscar").value.trim();
+
+      const indice = nombres.indexOf(nombre);
+
+      document.getElementById("resultadoBuscar").textContent =
+        "Resultado: " + indice;
+    }
+
+    function crearLista() {
+      const nombres = convertirArrayTexto("inputLista");
+      const lista = document.getElementById("lista");
+
+      lista.innerHTML = "";
+
+      nombres.forEach(nombre => {
+        const li = document.createElement("li");
+        li.textContent = nombre;
+        lista.appendChild(li);
+      });
+    }
+
+    function modificarTexto() {
+      const nuevoTexto = document.getElementById("nuevoTexto").value;
+
+      document.getElementById("textoCambiar").textContent = nuevoTexto;
+    }
+
+    const caja = document.getElementById("caja");
+
+    caja.addEventListener("click", function() {
+      caja.classList.toggle("resaltado");
+    });
+
+    const datosFormulario = [];
+
+    function guardarDato() {
+      const dato = document.getElementById("inputDato").value;
+      const lista = document.getElementById("listaDatos");
+
+      if (dato.trim() !== "") {
+        datosFormulario.push(dato);
+
+        const li = document.createElement("li");
+        li.textContent = dato;
+        lista.appendChild(li);
+
+        document.getElementById("inputDato").value = "";
+      }
+    }
+
+    function generarTarjetas() {
+      const productos = [
+        {
+          nombre: "Teclado",
+          precio: "$4500",
+          imagen: "https://resource.logitech.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/keyboards/k250/gallery/delorean-gallery-images/esp/k-250-graphite-top-view-2-esp.png"
+        },
+        {
+          nombre: "Mouse",
+          precio: "$2200",
+          imagen: "https://sony.scene7.com/is/image/sonyglobalsolutions/GG25_MSE-G500_Primary_image?$S7Product$&fmt=png-alpha"
+        },
+        {
+          nombre: "Monitor",
+          precio: "$85000",
+          imagen: "https://ar-media.hptiendaenlinea.com/catalog/product/9/U/9U5B0UT-3_T1767630999.png"
+        }
+      ];
+
+      const contenedor = document.getElementById("contenedorTarjetas");
+      contenedor.innerHTML = "";
+
+      productos.forEach(producto => {
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("tarjeta");
+
+        tarjeta.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <p><strong>${producto.nombre}</strong></p>
+          <p>Precio: ${producto.precio}</p>
+        `;
+
+        contenedor.appendChild(tarjeta);
+      });
+    }
+  </script>
+
+</body>
+</html>
